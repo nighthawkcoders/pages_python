@@ -38,7 +38,7 @@ def swap2_helper(a, b):
     # no return value
 
 
-def test_swappers():
+def driver():
     # call function order1
     swap1_helper(16, 10)  # send 2 parameters, expect swap
     swap1_helper(10, 16)  # no swap
@@ -57,4 +57,4 @@ def test_swappers():
 
 
 if __name__ == "__main__":
-    test_swappers()
+    driver()

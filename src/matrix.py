@@ -29,7 +29,7 @@ def print_matrix3(matrix):
         print(*row)  # pythons has (*) that is one line expansion of row into columns
 
 
-def test_matrices():
+def driver():
     # setup some text matrices
     keypad = [[1, 2, 3],
               [4, 5, 6],
@@ -59,4 +59,4 @@ def test_matrices():
 
 # tester section
 if __name__ == "__main__":
-    test_matrices()
+    driver()

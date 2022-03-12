@@ -1,60 +1,23 @@
 # menuy.py - function style menu
 # Imports typically listed at top
 # each import enables us to use logic that has been abstracted to other files and folders
+import matrix, swap, carList
 
-
-# Main list of [Prompts, Actions]
-# Two styles are supported to execute abstracted logic
-# 1. file names will be run by exec(open("filename.py").read())
-# 2. function references will be executed directly file.function()
-main_menu = [
-    ["Stringy", None],
-    ["Listy", None],
-    ["Loopy", None],
-]
-
-# Submenu list of [Prompt, Action]
-# Works similarly to main_menu
-sub_menu = [
-    ["Factors", None],
-    ["GCD", None],
-    ["LCM", None],
-    ["Primes", None],
-]
-
-patterns_sub_menu = [
-    ["Patterns", None],
-    ["PreFuncy", None],
-    ["Funcy", None],
-]
-
-# Menu banner is typically defined by menu owner
+# Menu banner
 border = "=" * 25
 banner = f"\n{border}\nPlease Select An Option\n{border}"
+# Main list of [Prompts, Actions]
+# Two styles are supported to execute abstracted logic
+# 1. "filename.py" will be run by exec(open("filename.py").read())
+# 2. file.function references will be executed as file.function()
+main_menu = [
+    ["Matrix", matrix.driver],
+    ["Swap", swap.driver],
+    ["List", carList.driver],
+]
 
 
-# def menu
-# using main_menu list:
-# 1. main menu and submenu reference are created [Prompts, Actions]
-# 2. menu_list is sent as parameter to menuy.menu function that has logic for menu control
-def menu():
-    title = "Function Menu" + banner
-    menu_list = main_menu.copy()
-    menu_list.append(["Math", submenu])
-    menu_list.append(["Patterns", patterns_submenu])
-    buildMenu(title, menu_list)
-
-# def submenu
-# using sub menu list above:
-# sub_menu works similarly to menu()
-def submenu():
-    title = "Function Submenu" + banner
-    buildMenu(title, sub_menu)
-def patterns_submenu():
-    title = "Function Submenu" + banner
-    buildMenu(title, patterns_sub_menu)
-
-def buildMenu(banner, options):
+def menu(banner, options):
     # header for menu
     print(banner)
     # build a dictionary from options
@@ -99,8 +62,18 @@ def buildMenu(banner, options):
         print(f"Not callable {action}")
     # end validation try
 
-    buildMenu(banner, options)  # recursion, start menu over again
+    menu(banner, options)  # recursion, start menu over again
+
+
+# def menu
+# using main_menu list:
+# 1. main menu and submenu reference are created [Prompts, Actions]
+# 2. menu_list is sent as parameter to menuy.menu function that has logic for menu control
+def driver():
+    title = "Function Menu" + banner
+    menu_list = main_menu.copy()
+    menu(title, menu_list)
 
 
 if __name__ == "__main__":
-    menu()
+    driver()

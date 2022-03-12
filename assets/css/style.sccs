@@ -2,13 +2,11 @@
 ---
 
 @import "{{ site.theme }}";
-#video_wrapper
-{
+#video_wrapper {
     margin:0px;
     padding:0px;
 }
-#video_wrapper video
-{
+#video_wrapper video {
     position: fixed;
     top: 50%; left: 50%;
     z-index: -99; important!

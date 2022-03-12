@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## GitHub Pages Home for Tri 3 2022
+## GitHub Pages Home (design by Tianbin)
 
 {% include navigation.html %}
 {% include layout.html %}

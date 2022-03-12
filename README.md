@@ -1,7 +1,3 @@
----
-layout: default
----
-
 ## README
 
 {% include navigation.html %}

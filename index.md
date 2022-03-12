@@ -6,9 +6,9 @@ layout: default
 
 {% include navigation.html %} 
 
-<center><iframe frameborder="0" width="100%" height="800px" src="https://replit.com/@jmort1021/pagespython/Menu?lite=true"></center>
+<center><iframe frameborder="0" width="100%" height="800px" src="https://replit.com/@jmort1021/pagespython?lite=true#README"></center>
 
-![Replit.com](https://replit.com/@jmort1021/pagespython/Menu?lite=true)
+![Replit.com](https://replit.com/@jmort1021/pagespython?lite=true#README)
 
 {% include_relative README.md %}
 

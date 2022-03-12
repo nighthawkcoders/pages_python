@@ -7,6 +7,9 @@ layout: default
 {% include navigation.html %}
 {% include layout.html %}
 
+<!---
+Background Video
+-->
 <body>
   <div id="video_wrapper">
     <video autoplay loop>

@@ -5,9 +5,10 @@ layout: default
 ## GitHub Pages Home (design by Tianbin)
 
 {% include navigation.html %}
-{% include layout.html %}
 
 <!---
+{% include layout.html %}
+
 Background Video
 -->
 <div id="video_wrapper">

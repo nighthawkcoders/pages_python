@@ -3,7 +3,7 @@ layout: default
 ---
 
 ## Home (Tianbin style)
-This home page was created based off of style provide by Tianbin (a student in AP CS Principles). 
+This page uses an autoplay video loop as its backround.
 
 
 

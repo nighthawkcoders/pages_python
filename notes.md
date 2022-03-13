@@ -1,3 +1,9 @@
+<div id="video_wrapper">
+  <video autoplay loop>
+      <source src="https://drive.google.com/uc?export=view&id=1vEEQAHEQNWlZYUpMbfz9t8MYNVgxwoes" type="video/mp4">
+  </video>
+</div>
+
 # Notes
 ### 5.1. [Beneficial and Harmful Effects of Computing](https://github.com/nighthawkcoders/nighthawk_csp/wiki/Tri-3-TPT-0.1-related-to-Beneficial-and-Harmful-Effects-of-Computing-Big-Idea-5.1)
 

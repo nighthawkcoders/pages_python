@@ -13,7 +13,7 @@ layout: default
 <!-- Remainder of this file is the story of how it is made -->
 
 ## Home (Tianbin style)
-This page uses an autoplay video loop as its backround.  This Code, HTML and CSS, are illustrated below.
+This page uses an autoplay video loop as its backround.  This Code, HTML and CSS, is illustrated below.
 
 
 * HTML Code [index.md](https://github.com/nighthawkcoders/pages_python/edit/gh-pages/index.md)

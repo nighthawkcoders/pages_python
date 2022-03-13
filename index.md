@@ -4,10 +4,11 @@ layout: default
 
 ## GitHub Pages Home (Tianbin style)
 
-{% include navigation.html %}
-{% include layout.html %}
+
 
 <!---
+{% include navigation.html %}
+{% include layout.html %}
 Background Video
 -->
 <div id="video_wrapper">

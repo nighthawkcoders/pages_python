@@ -44,7 +44,7 @@ This page uses an autoplay video loop as its backround.  This code is illustrate
 </style>
 ```
 
-## Ripping a Theme
+## Ripping a Theme [Midnight](https://github.com/pages-themes/midnight/blob/master/_layouts/default.html)
 Using GitHub pages with Jekyll requires us to establish style.  This page is built on midnight theme.  However to customize it, this required ripping authors work and doing some customization.  According to the 'Creative Commons' license provided by the author, ripping this theme is completely valid.
 
 ```html

@@ -2,8 +2,8 @@
 layout: default
 ---
 
-## Home (Tianbin style)
-This page uses an autoplay video loop as its backround.
+## Home, index.md (Tianbin style)
+This page uses an autoplay video loop as its backround.  This code is illustrated below.
 
 
 * HTML Code
@@ -16,9 +16,15 @@ This page uses an autoplay video loop as its backround.
 </div>
 ```
 
+<div id="video_wrapper">
+  <video autoplay loop>
+    <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
+  </video>
+</div>
+
 * CSS Code
 ```html
-<!-- added to custom _includes/ index.md -->
+<!-- added to custom _includes/head-custom2.html -->
 
 <style>
 #video_wrapper {
@@ -38,9 +44,10 @@ This page uses an autoplay video loop as its backround.
 </style>
 ```
 
-<div id="video_wrapper">
-  <video autoplay loop>
-    <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
-  </video>
-</div>
+## Ripping a Theme
+Using GitHub pages with Jekyll requires us to establish style.  This page is built on midnight theme.  However to customize it, this required ripping authors work and doing some customization.  According to the 'Creative Commons' license provided by the author, ripping this theme is completely valid.
+
+
+
+
 

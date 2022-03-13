@@ -74,7 +74,7 @@ Using GitHub pages with Jekyll requires us to establish style.  This page is bui
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     {% include head-custom.html %}
     
-    <!-- nighthawk coding society has inserted its own file for thigs like <style>-->
+    <!-- "include head-custom2.html" allows inserted style that can be updated in independent file -->
     {% include head-custom2.html %}
 
   </head>
@@ -105,10 +105,10 @@ Using GitHub pages with Jekyll requires us to establish style.  This page is bui
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/NighthawkCoding">nighthawkcodingsociety</a></span> 
         </div>
         
-        <!-- nighthawk coding society has inserted navigation that can be updated in independent file -->
+        <!-- "include navigation.html" allows inserted navigation that can be updated in independent file -->
         {% include navigation.html %}
 
-        <!-- {{ content }} is Jekyll magic, each md file in site will be inserted here -->
+        <!-- "content" is Jekyll keyword, each md file in site will be converted and inserted here -->
         {{ content }}
 
       </section>

@@ -108,7 +108,7 @@ Using GitHub pages with Jekyll requires us to establish style.  This page is bui
         <!-- nighthawk coding society has inserted navigation that can be updated in independent file -->
         {% include navigation.html %}
 
-        <!-- this is Jekyll magic, each md file in site will be inserted here -->
+        <!-- {{ content }} is Jekyll magic, each md file in site will be inserted here -->
         {{ content }}
 
       </section>

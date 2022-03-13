@@ -51,33 +51,13 @@ This page uses an autoplay video loop as its backround.  This Code, HTML and CSS
 ```
 
 ## Ripping a [theme: jekyll-theme-midnight](https://github.com/pages-themes/midnight/blob/master/_layouts/default.html)
-Using GitHub pages with Jekyll requires us to establish style.  This page is built on midnight theme.  However to customize it, this required ripping authors work and doing some customization.  According to the [Creative Commons license](https://github.com/pages-themes/midnight/blob/master/LICENSE) provided by the author, ripping this theme is completely valid.
+Using GitHub pages with Jekyll requires us to establish personal style.  This page is built on midnight theme.  However to customize it, this requires ripping the authors work and doing personal customization.  According to the [Creative Commons license](https://github.com/pages-themes/midnight/blob/master/LICENSE) provided by the author, ripping this theme is completely valid.  Below is portion of the file, showing insertion of navigation and content.
 
 ```html
 <!-- pages_python/_layouts/default.html
      customization added to original midnight theme found through GitHub Pages -->
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    {% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    {% include head-custom.html %}
-    
-    <!-- "include head-custom2.html" allows inserted style that can be updated in independent file -->
-    {% include head-custom2.html %}
-
-  </head>
+  
   <body>
       <div id="header">
         <nav>
@@ -108,9 +88,13 @@ Using GitHub pages with Jekyll requires us to establish style.  This page is bui
         <!-- "include navigation.html" allows inserted navigation that can be updated in independent file -->
         {% include navigation.html %}
 
-        <!-- "content" is Jekyll keyword, each md file in site will be converted and inserted here -->
-        {{ content }}
-
+        <!-- "content" is Jekyll keyword, the md content will be inserted here -->
+<div id="video_wrapper">
+  <video autoplay loop>
+    <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
+  </video>
+</div>
+        
       </section>
 
     </div>

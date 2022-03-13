@@ -2,25 +2,29 @@
 layout: default
 ---
 
+<!-- HTML for Video Play -->
+
+<div id="video_wrapper">
+  <video autoplay loop>
+    <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
+  </video>
+</div>
+
+<!-- Remainder of this file is the story of how it is made -->
+
 ## Home (Tianbin style)
 This page uses an autoplay video loop as its backround.  This code is illustrated below.
 
 
 * HTML Code [index.md](https://github.com/nighthawkcoders/pages_python/edit/gh-pages/index.md)
 ```html
-<!-- added to end of index.md -->
+<!-- added to index.md -->
 <div id="video_wrapper">
   <video autoplay loop>
     <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
   </video>
 </div>
 ```
-
-<div id="video_wrapper">
-  <video autoplay loop>
-    <source src="https://drive.google.com/uc?export=view&id=1Qote5m--Bme0bE4_o6wAKNRxWY8pJnuL" type="video/mp4">
-  </video>
-</div>
 
 * CSS Code
 ```html

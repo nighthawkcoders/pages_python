@@ -17,6 +17,7 @@ This page uses an autoplay video loop as its backround.  This Code, HTML and CSS
 
 
 * HTML Code [index.md](https://github.com/nighthawkcoders/pages_python/edit/gh-pages/index.md)
+
 ```html
 <!-- added to index.md -->
 <div id="video_wrapper">
@@ -27,6 +28,7 @@ This page uses an autoplay video loop as its backround.  This Code, HTML and CSS
 ```
 
 * CSS Code
+
 ```html
 <!-- pages_python/_includes/head-custom2.html -->
 

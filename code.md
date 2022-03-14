@@ -1,4 +1,4 @@
-# Algorithms Review
+# Code and Algorithms Review
 
 * Replit contains documentations details
     * README has review ticket and code for week of assignment.

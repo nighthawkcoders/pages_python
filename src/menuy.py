@@ -1,7 +1,8 @@
 # menuy.py - function style menu
 # Imports typically listed at top
 # each import enables us to use logic that has been abstracted to other files and folders
-import matrix, swap, mathy, tree
+import matrix, swap, mathy, tree, advy, carlist, fibonacci, fibonacci_class
+
 ##
 # Menu banner
 border = "=" * 25
@@ -13,7 +14,8 @@ banner = f"\n{border}\nPlease Select An Option\n{border}"
 main_menu = [
     ["Matrix", matrix.driver],
     ["Swap", swap.driver],
-    ["Tree", tree.driver]
+    ["Tree", tree.driver],
+    ["Car List", carlist.driver],
 ]
 
 # Submenu list of [Prompt, Action]
@@ -23,6 +25,14 @@ sub_menu = [
     ["GCD", mathy.gcd],
     ["LCM", mathy.lcm],
     ["Primes", mathy.primes],
+    ["Fibonacci",fibonacci.driver],
+    ["Fibonacci Class",fibonacci_class.driver]
+]
+
+quiz_sub_menu = [
+    ["At the Beach?", advy.beach],
+    ["On top of the Mountains?", advy.mountain],
+    ["Navigating a lake?", advy.lake]
 ]
 
 
@@ -82,16 +92,20 @@ def submenu():
     menu(title, sub_menu)
 
 
-# def menu
-# using main_menu list:
-# 1. main menu and submenu reference are created [Prompts, Actions]
-# 2. menu_list is sent as parameter to menuy.menu function that has logic for menu control
+# def quiz submenu
+# using sub menu list above:
+# sub_menu works similarly to menu()
+def quiz_submenu():
+    title = "Function Submenu" + banner
+    menu(title, quiz_sub_menu)
+
+
 def driver():
     title = "Function Menu" + banner
     menu_list = main_menu.copy()
     menu_list.append(["Math", submenu])
+    menu_list.append(["quiz", quiz_submenu])
     menu(title, menu_list)
-
 
 if __name__ == "__main__":
     driver()

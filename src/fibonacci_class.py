@@ -2,12 +2,15 @@
 
 class Fibonacci:
     def __init__(self):
-        self.fiboSeq = [0,1]
+        self.fiboSeq = [0, 1]
 
-    #__call__ is a special function in Python that, when implemented inside a class,
-    # gives its instances (objects) the ability to behave like a function.
-    # It means after implementing __call__ method inside the Python class,
-    # we can invoke its instances like a function
+    ''' 
+    __call__ is a special function/method in Python, when implemented inside a class, this gives its instances 
+    (or objects) the ability to behave like a function. The __call__ method inside the  Python class allows 
+    instance to invoke this method using object like a function.  
+    
+    This method has a n as a parameter which is used to calculate the fibonacci number.
+    '''
     def __call__(self, n):
         if n < len(self.fiboSeq):
             return self.fiboSeq[n]
@@ -26,17 +29,16 @@ def driver():
         try:
             n = int(n)
             # Validate the value of n
-            #The isinstance() function in Python returns true or false if a variable matches a
-            # specified data type. isinstance(variable_to_check, data_type)
-            if not (isinstance(n, int) and n >= 0):
+            if n < 2 or n > 99:
                 raise ValueError
-            print("{0}th term  of Fibonacci sequence is: ".format(n))
-            print(fibo_of(n-1)) # print the nth term
-            print("Fibonacci sequence of {0} terms is: ".format(n))
-            print([fibo_of(i) for i in range(0,n)])
+            # Fibonacci term corresponding to n
+            print(f"Term {n} of Fibonacci sequence is: ", fibo_of(n - 1))
+            # Produces a list of fibonacci values, one fibonacci result for each step in range
+            print(f"Fibonacci sequence of {n} terms is: ", [fibo_of(i) for i in range(n)])
             break
         except:
-            print(f'Positive integer number expected, got "{n}" Try again.')
+            print(f'Positive integer number in range 2 to 99 is expected, got "{n}" Try again.')
+
 
 if __name__ == "__main__":
     driver()

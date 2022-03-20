@@ -36,7 +36,7 @@ def driver():
             # Produces a list of fibonacci values, one fibonacci result for each step in range
             print(f"Fibonacci sequence of {n} terms is: ", [fibo_of(i) for i in range(n)])
             break
-        except:
+        except ValueError:
             print(f'Positive integer number in range 2 to 99 is expected, got "{n}" Try again.')
 
 

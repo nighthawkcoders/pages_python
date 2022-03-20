@@ -2,45 +2,41 @@
 # Imports typically listed at top
 # each import enables us to use logic that has been abstracted to other files and folders
 from src.week0 import matrix, swap, tree
-from src.week1 import carlist, fibonacci, fibonacci_class
-from src.week2 import mathy
-from src.week3 import advy
+from src.week1 import carlist, fibonacci
+from src.week2 import mathy, fibonacci_class, advy
 
-##
-# Menu banner
-border = "=" * 25
-banner = f"\n{border}\nPlease Select An Option\n{border}"
-# Main list of [Prompts, Actions]
+# Menu list of [Prompts, Actions]
 # Two styles are supported to execute abstracted logic
 # 1. "filename.py" will be run by exec(open("filename.py").read())
 # 2. file.function references will be executed as file.function()
-main_menu = [
+data_menu = [
     ["Matrix", matrix.driver],
     ["Swap", swap.driver],
     ["Tree", tree.driver],
     ["Car List", carlist.driver],
 ]
 
-# Submenu list of [Prompt, Action]
-# Works similarly to main_menu
-sub_menu = [
+math_menu = [
     ["Factors", mathy.factors],
     ["GCD", mathy.gcd],
     ["LCM", mathy.lcm],
     ["Primes", mathy.primes],
-    ["Fibonacci",fibonacci.driver],
-    ["Fibonacci Class",fibonacci_class.driver]
+    ["Fibonacci", fibonacci.driver],
+    ["Fibonacci Class", fibonacci_class.driver]
 ]
 
-quiz_sub_menu = [
+adventure_menu = [
     ["At the Beach?", advy.beach],
     ["On top of the Mountains?", advy.mountain],
     ["Navigating a lake?", advy.lake]
 ]
 
 
-def menu(banner, options):
+def menu(title, options):
     # header for menu
+    # Menu banner
+    border = "=" * 25
+    banner = f"\n{border}\n{title}\n{border}"
     print(banner)
     # build a dictionary from options
     prompts = {0: ["Exit", None]}
@@ -84,31 +80,40 @@ def menu(banner, options):
         print(f"Not callable {action}")
     # end validation try
 
-    menu(banner, options)  # recursion, start menu over again
+    menu(title, options)  # recursion, start menu over again
 
 
-# def submenu
+# def math_menu
 # using sub menu list above:
 # sub_menu works similarly to menu()
-def submenu():
-    title = "Function Submenu" + banner
-    menu(title, sub_menu)
+def _data_menu():
+    title = "Data SubMenu"
+    menu(title, data_menu)
 
 
-# def quiz submenu
+# def math_menu
 # using sub menu list above:
 # sub_menu works similarly to menu()
-def quiz_submenu():
-    title = "Function Submenu" + banner
-    menu(title, quiz_sub_menu)
+def _math_menu():
+    title = "Math SubMenu"
+    menu(title, math_menu)
+
+
+# def adventure menu
+# using sub menu list above:
+# sub_menu works similarly to menu()
+def _adventure_menu():
+    title = "Adventure SubMenu"
+    menu(title, adventure_menu)
 
 
 def driver():
-    title = "Function Menu" + banner
-    menu_list = main_menu.copy()
-    menu_list.append(["Math", submenu])
-    menu_list.append(["quiz", quiz_submenu])
+    title = "Main Menu"
+    menu_list = [["Data", _data_menu],
+                 ["Math", _math_menu],
+                 ["Adventure", _adventure_menu]]
     menu(title, menu_list)
+
 
 if __name__ == "__main__":
     driver()

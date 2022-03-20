@@ -16,7 +16,7 @@ InfoDb.append({
     "DOB": "August 2",
     "Residence": "San Diego",
     "Email": "snaidu@powayusd.com",
-    "Owns_Cars": ["A", "B", "C"]
+    "Owns_Cars": ["Alpha Romeo", "Bugatti", "Corvette"]
 })
 
 

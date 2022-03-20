@@ -4,7 +4,7 @@ Writing a function to print a Matrix
 """
 
 
-# Classic nested loops using ij indexes
+# Classic nested loops using ij indicies
 def print_matrix1(matrix):
     print("Classic nested loops using ij indexes")
     for i in range(len(matrix)):  # outer loop (i), built on length of matrix (rows)

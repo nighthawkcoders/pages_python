@@ -1,7 +1,10 @@
 # menuy.py - function style menu
 # Imports typically listed at top
 # each import enables us to use logic that has been abstracted to other files and folders
-import matrix, swap, mathy, tree, advy, carlist, fibonacci, fibonacci_class
+from src.week0 import matrix, swap, tree
+from src.week1 import carlist, fibonacci, fibonacci_class
+from src.week2 import mathy
+from src.week3 import advy
 
 ##
 # Menu banner

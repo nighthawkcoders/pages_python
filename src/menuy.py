@@ -3,7 +3,7 @@
 # each import enables us to use logic that has been abstracted to other files and folders
 from week0 import matrix, swap, tree
 from week1 import carlist, fibonacci
-from week2 import mathy, fibonacci_class, advy
+from week2 import mathy, fibonacci_class, advy, palindrome, mathyc
 
 # Menu list of [Prompts, Actions]
 # Two styles are supported to execute abstracted logic
@@ -14,10 +14,12 @@ data_menu = [
     ["Swap", swap.driver],
     ["Tree", tree.driver],
     ["Car List", carlist.driver],
+    ["Palindrome", palindrome.driver],
 ]
 
 math_menu = [
     ["Factors", mathy.factors],
+    ["Classy Factors", mathyc.driver],
     ["GCD", mathy.gcd],
     ["LCM", mathy.lcm],
     ["Primes", mathy.primes],

@@ -53,7 +53,12 @@ class Palindrome:
     def analysis(self):
         return self._analysis
 
-if __name__=="__main__":
-    pali = Palindrome("A man, a plan, a canal -- Panamass!")
+
+def driver():
+    print("A man, a plan, a canal -- Panama!")
+    pali = Palindrome("A man, a plan, a canal -- Panama!")
     pali.is_palindrome()
     print(pali.analysis)
+
+if __name__=="__main__":
+   driver()

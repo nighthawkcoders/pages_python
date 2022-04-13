@@ -1,45 +1,11 @@
-from __init__ import db
 from cruddy.model import Users
 
 
-# this is method called by frontend, it has been randomized between Alchemy and Native SQL for fun
-def users_all():
-    """  May have some problems with sql in deployment
-    if random.randint(0, 1) == 0:
-        table = users_all_alc()
-    else:
-        table = users_all_sql()
-    return table
-    """
-
-    return users_all_alc()
-
-
 # SQLAlchemy extract all users from database
-def users_all_alc():
+def users_all():
     table = Users.query.all()
     json_ready = [peep.read() for peep in table]
     return json_ready
-
-
-# Native SQL extract all users from database
-def users_all_sql():
-    table = db.session.execute('select * from users')
-    json_ready = sqlquery_2_list(table)
-    return json_ready
-
-
-# ALGORITHM to convert the results of an SQL Query to a JSON ready format in Python
-def sqlquery_2_list(rows):
-    out_list = []
-    keys = rows.keys()  # "Keys" are the columns of the sql query
-    for values in rows:  # "Values" are rows within the SQL database
-        row_dictionary = {}
-        for i in range(len(keys)):  # This loop lines up K, V pairs, same as JSON style
-            row_dictionary[keys[i]] = values[i]
-        row_dictionary["query"] = "by_sql"  # This is for fun a little watermark
-        out_list.append(row_dictionary)  # Finally we have a out_list row
-    return out_list
 
 
 # SQLAlchemy extract users from database matching term
@@ -60,3 +26,25 @@ def user_by_id(userid):
 def user_by_email(email):
     """finds User in table matching email """
     return Users.query.filter_by(email=email).first()
+
+
+if __name__ == "__main__":
+
+    # Look at table
+    print("Print all")
+    for user in users_all():
+        print(user)
+    print()
+
+    # Look at table
+    print("Print ilike example.com")
+    for user in users_ilike("example.com"):
+        print(user)
+    print()
+
+    print("Print userID 2")
+    print(user_by_id(2).read())
+
+    print("Print userID tedison@example.com")
+    print(user_by_email("tedison@example.com").read())
+

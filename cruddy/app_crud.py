@@ -2,8 +2,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify, make_response
 from flask_login import login_required
 from __init__ import login_manager
-from cruddy.query import Users, login, authorize, users_all, user_by_id, users_ilike
-
+from cruddy.query import Users, login, logout, authorize, users_all, user_by_id, users_ilike
 
 # blueprint defaults https://flask.palletsprojects.com/en/2.0.x/api/#blueprint-objects
 app_crud = Blueprint('crud', __name__,
@@ -41,11 +40,18 @@ def crud_login():
     if request.form:
         email = request.form.get("email")
         password = request.form.get("password")
-        if login(email, password):       # zero index [0] used as email is a tuple
+        if login(email, password):  # zero index [0] used as email is a tuple
             return redirect(url_for('crud.crud'))
 
     # if not logged in, show the login page
     return render_template("login.html")
+
+
+# if login url, show phones table only
+@app_crud.route('/logout/', methods=["GET", "POST"])
+def crud_logout():
+    logout()
+    return redirect(url_for('crud.crud'))
 
 
 @app_crud.route('/authorize/', methods=["GET", "POST"])
@@ -56,8 +62,8 @@ def crud_authorize():
         user_name = request.form.get("user_name")
         email = request.form.get("email")
         password1 = request.form.get("password1")
-        password2 = request.form.get("password1")           # password should be verified
-        if authorize(user_name, email, password1):    # zero index [0] used as user_name and email are type tuple
+        password2 = request.form.get("password1")  # password should be verified
+        if authorize(user_name, email, password1):  # zero index [0] used as user_name and email are type tuple
             return redirect(url_for('crud.crud_login'))
     # show the auth user page if the above fails for some reason
     return render_template("authorize.html")

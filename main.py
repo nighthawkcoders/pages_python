@@ -19,5 +19,8 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    # runs the application on the repl development server
-    app.run(debug=True, port="5220")
+    # localhost run 
+    # app.run(debug=True, port="5220")
+  
+    # replit run
+    app.run(host='0.0.0.0',debug=True,port=8080)

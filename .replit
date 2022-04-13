@@ -1,2 +1,2 @@
 language = "python3"
-run = "python console/menuy.py"
+# run = "python console/menuy.py"

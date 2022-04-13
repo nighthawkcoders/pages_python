@@ -9,12 +9,14 @@ from cruddy.login import login, logout, authorize
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
 
-# global to redirect login
-next_page = None
 
 @app.route('/')
 def index():
     return render_template("index.html")
+
+
+# Preserve redirect after login to go to intended next page
+next_page = None
 
 
 # Flask-Login directs unauthorised users to this unauthorized_handler
@@ -30,11 +32,18 @@ def unauthorized():
 @app.route('/login/', methods=["GET", "POST"])
 def main_login():
     # obtains form inputs and fulfills login requirements
+    global next_page
     if request.form:
         email = request.form.get("email")
         password = request.form.get("password")
-        if login(email, password):  # zero index [0] used as email is a tuple
-            return redirect(url_for(next_page or url_for('index')))
+        if login(email, password):
+            if next_page is None:
+                return redirect(url_for('index'))
+            else:
+                temp = next_page
+                next_page = None
+                return redirect(url_for(temp))
+
 
     # if not logged in, show the login page
     return render_template("login.html")
@@ -49,17 +58,21 @@ def main_logout():
 
 @app.route('/authorize/', methods=["GET", "POST"])
 def main_authorize():
+    error_msg = ""
     # check form inputs and creates user
     if request.form:
         # validation should be in HTML
         user_name = request.form.get("user_name")
         email = request.form.get("email")
         password1 = request.form.get("password1")
-        password2 = request.form.get("password1")  # password should be verified
-        if authorize(user_name, email, password1):  # zero index [0] used as user_name and email are type tuple
-            return redirect(url_for('main_login'))
+        password2 = request.form.get("password2")  # password should be verified
+        if password1 == password2:
+            if authorize(user_name, email, password1):
+                return redirect(url_for('main_login'))
+        else:
+            error_msg = "Passwords do not match"
     # show the auth user page if the above fails for some reason
-    return render_template("authorize.html")
+    return render_template("authorize.html", error_msg=error_msg)
 
 
 @app.errorhandler(404)

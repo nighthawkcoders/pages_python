@@ -23,9 +23,9 @@
                             Data
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href={{ url_for('crud.crud') }}>SQL CRUD</a></li>
-                            <li><a class="dropdown-item" href={{ url_for('crud_api.crud_api') }}>SQL CRUD Async</a></li>
-                            <li><a class="dropdown-item" href={{ url_for('crud.search') }}>SQL Search</a></li>
+                            <li><a class="dropdown-item" href={{url_for('crud.crud')}}>SQL CRUD</a></li>
+                            <li><a class="dropdown-item" href={{url_for('crud_api.crud_api')}}>SQL CRUD Async</a></li>
+                            <li><a class="dropdown-item" href={{url_for('crud.search')}}>SQL Search</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -56,7 +56,7 @@
 
         {% block navbar_script %}
             <!-- Navigation bar JavaScript support -->
-            <script src={{  url_for("static", filename="javascript/navbar.js", version='140') }}></script>
+            <script src={{url_for("static", filename="javascript/navbar.js", version='140')}}></script>
         {% endblock %}
 
     </div>

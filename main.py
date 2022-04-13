@@ -9,6 +9,8 @@ from cruddy.login import login, logout, authorize
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
 
+# global to redirect login
+next_page = None
 
 @app.route('/')
 def index():
@@ -19,6 +21,8 @@ def index():
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
+    global next_page
+    next_page = request.endpoint
     return redirect(url_for('main_login'))
 
 
@@ -30,7 +34,7 @@ def main_login():
         email = request.form.get("email")
         password = request.form.get("password")
         if login(email, password):  # zero index [0] used as email is a tuple
-            return redirect(url_for('index'))
+            return redirect(url_for(next_page or url_for('index')))
 
     # if not logged in, show the login page
     return render_template("login.html")

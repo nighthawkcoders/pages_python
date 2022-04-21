@@ -1,4 +1,5 @@
 from flask import render_template, redirect, request, url_for
+from flask_login import login_required
 
 from __init__ import app, login_manager
 from cruddy.app_crud import app_crud
@@ -51,6 +52,7 @@ def main_login():
 
 # if login url, show phones table only
 @app.route('/logout/', methods=["GET", "POST"])
+@login_required
 def main_logout():
     logout()
     return redirect(url_for('index'))

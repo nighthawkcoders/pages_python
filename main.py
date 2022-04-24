@@ -1,3 +1,4 @@
+import markdown
 from flask import render_template, redirect, request, url_for
 from flask_login import login_required
 
@@ -6,6 +7,7 @@ from cruddy.app_crud import app_crud
 from cruddy.app_crud_api import app_crud_api
 
 from cruddy.login import login, logout, authorize
+from cruddy.query import user_by_id
 
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
@@ -14,6 +16,21 @@ app.register_blueprint(app_crud_api)
 @app.route('/')
 def index():
     return render_template("index.html")
+
+
+@app.route('/notes')
+def notes():
+    po = user_by_id(1)
+    if po is not None:
+        user = po.read()  # placed in list for easier/consistent use within HTML
+
+    notes = []
+    for note in po.notes:
+        note = dict(note)
+        note['note'] = markdown.markdown(note['note'])
+        notes.append(note)
+
+    return render_template('notes.html', user=user, notes=notes)
 
 
 # Preserve redirect after login to go to intended next page
@@ -44,7 +61,6 @@ def main_login():
                 temp = next_page
                 next_page = None
                 return redirect(url_for(temp))
-
 
     # if not logged in, show the login page
     return render_template("login.html")

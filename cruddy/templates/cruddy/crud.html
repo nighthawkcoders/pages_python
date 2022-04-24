@@ -4,7 +4,7 @@
 {% extends "layout.html" %}
 
 <!-- CONTENT (in <head>), content for this page -->
-{% block meta %}
+{% block title %}
     <title>CRUD page</title>
     <script src={{url_for("crud.static", filename="javascript/validation.js", version='101') }}></script>
     <script src={{url_for("crud.static", filename="javascript/reload_page.js", version='101') }}></script>

@@ -7,18 +7,29 @@ from flask_login import UserMixin
 
 # Tutorial: https://www.sqlalchemy.org/library.html#tutorials, try to get into Python shell and follow along
 
+# Define the Users Notes with a relationship to Users within the model
+class Notes(db.Model):
+    __tablename__ = 'notes'
+    # define the Notes schema
+    id = db.Column(db.Integer, primary_key=True)
+    note = db.Column(db.Text, unique=False, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.userID'))
+
+
 # Define the Users table within the model
 # -- Object Relational Mapping (ORM) is the key concept of SQLAlchemy
 # -- a.) db.Model is like an inner layer of the onion in ORM
 # -- b.) Users represents data we want to store, something that is built on db.Model
 # -- c.) SQLAlchemy ORM is layer on top of SQLAlchemy Core, then SQLAlchemy engine, SQL
 class Users(UserMixin, db.Model):
+    __tablename__ = 'users'
     # define the Users schema
     userID = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=False, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), unique=False, nullable=False)
     phone = db.Column(db.String(255), unique=False, nullable=False)
+    notes = db.relationship("Notes", cascade='all, delete', backref='users', lazy=True)
 
     # constructor of a User object, initializes of instance variables within object
     def __init__(self, name, email, password, phone):
@@ -98,12 +109,14 @@ def model_tester():
     """Tester data for table"""
     u1 = Users(name='Thomas Edison', email='tedison@example.com', password='123toby', phone="1111111111")
     u2 = Users(name='Nicholas Tesla', email='ntesla@example.com', password='123niko', phone="1111112222")
+    n2 = Notes(note='# Niko First Note')
     u3 = Users(name='Alexander Graham Bell', email='agbell@example.com', password='123lex', phone="1111113333")
     u4 = Users(name='Eli Whitney', email='eliw@example.com', password='123whit', phone="1111114444")
     u5 = Users(name='John Mortensen', email='jmort1021@gmail.com', password='123qwerty', phone="8587754956")
     u6 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8587754956")
     # U7 intended to fail as duplicate key
     u7 = Users(name='John Mortensen', email='jmort1021@yahoo.com', password='123qwerty', phone="8586791294")
+
     table = [u1, u2, u3, u4, u5, u6, u7]
     for row in table:
         try:
@@ -116,12 +129,17 @@ def model_tester():
 
 def model_printer():
     print("------------")
-    print("Table: users with SQL query")
+    print("Table: users")
     print("------------")
     result = db.session.execute('select * from users')
     print(result.keys())
-    for row in result:
-        print(row)
+    users = Users.query
+    for user in users:
+        if len(user.notes) == 0:
+            comment = "# " + user.name + " first note."
+            record = Notes(note=comment)
+            user.notes.append(record)
+        print(user.userID, user.name, user.email, user.phone, user.notes)
 
 
 if __name__ == "__main__":

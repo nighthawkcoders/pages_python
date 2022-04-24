@@ -1,6 +1,6 @@
 import markdown
 from flask import render_template, redirect, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from __init__ import app, login_manager
 from cruddy.app_crud import app_crud
@@ -19,12 +19,22 @@ def index():
 
 
 @app.route('/notes')
+@login_required
 def notes():
-    po = user_by_id(1)
+    user = ""
+    po = user_by_id(current_user.userID)
     if po is not None:
         user = po.read()  # placed in list for easier/consistent use within HTML
 
+    ''' Test Markdown'''
     notes = []
+    note = {'note' :  "#### Static markdown test 1\n This is intro paragraph"}
+    note['note'] = markdown.markdown(note['note'])
+    notes.append(note)
+    note = {'note' :  "#### Static markdown test 2\n This is intro paragraph"}
+    note['note'] = markdown.markdown(note['note'])
+    notes.append(note)
+
     for note in po.notes:
         note = dict(note)
         note['note'] = markdown.markdown(note['note'])

@@ -22,22 +22,14 @@ def index():
 @login_required
 def notes():
     user = ""
-    po = user_by_id(current_user.userID)
-    if po is not None:
-        user = po.read()  # placed in list for easier/consistent use within HTML
+    uo = user_by_id(current_user.userID)
+    if uo is not None:
+        user = uo.read()  # placed in list for easier/consistent use within HTML
 
-    ''' Test Markdown'''
     notes = []
-    note = {'note' :  "#### Static markdown test 1\n This is intro paragraph"}
-    note['note'] = markdown.markdown(note['note'])
-    notes.append(note)
-    note = {'note' :  "#### Static markdown test 2\n This is intro paragraph"}
-    note['note'] = markdown.markdown(note['note'])
-    notes.append(note)
-
-    for note in po.notes:
-        note = dict(note)
-        note['note'] = markdown.markdown(note['note'])
+    for note in uo.notes:
+        note = note.read()  # convert to JSON
+        note['note'] = markdown.markdown(note['note'])  # markdown to html
         notes.append(note)
 
     return render_template('notes.html', user=user, notes=notes)

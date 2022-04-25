@@ -1,42 +1,21 @@
-import markdown
 from flask import render_template, redirect, request, url_for
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 from __init__ import app, login_manager
 from cruddy.app_crud import app_crud
 from cruddy.app_crud_api import app_crud_api
+from notey.app_notes import app_notes
 
 from cruddy.login import login, logout, authorize
-from cruddy.query import user_by_id
 
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
+app.register_blueprint(app_notes)
 
 
 @app.route('/')
 def index():
     return render_template("index.html")
-
-
-@app.route('/notes')
-@login_required
-def notes():
-    user = ""
-    uo = user_by_id(current_user.userID)
-    if uo is not None:
-        user = uo.read()  # placed in list for easier/consistent use within HTML
-
-    notes = []
-    for note in uo.notes:
-        note = note.read()  # convert to JSON
-        note['note'] = markdown.markdown(note['note'])  # markdown to html
-        notes.append(note)
-
-    return render_template('notes.html', user=user, notes=notes)
-
-
-# Preserve redirect after login to go to intended next page
-next_page = None
 
 
 # Flask-Login directs unauthorised users to this unauthorized_handler

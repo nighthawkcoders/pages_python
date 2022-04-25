@@ -28,8 +28,10 @@ def notes():
             note = note.read()                              # extract note record (Dictionary)
             note['note'] = markdown.markdown(note['note'])  # convert markdown to html
             list_notes.append(note)                         # prepare note list for render_template
+        if list_notes is not None:
+            list_notes.reverse()
     # render user and note data in reverse chronological order
-    return render_template('notes.html', user=user, notes=list_notes.reverse())
+    return render_template('notes.html', user=user, notes=list_notes)
 
 
 # Preserve redirect after login to go to intended next page

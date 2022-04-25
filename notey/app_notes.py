@@ -16,7 +16,7 @@ app_notes = Blueprint('notes', __name__,
 def notes():
     # defaults are empty, in case user data not found
     user = ""
-    notes = []
+    list_notes = []
 
     # grab user database  object based on current login
     uo = user_by_id(current_user.userID)
@@ -27,9 +27,9 @@ def notes():
         for note in uo.notes:                               # loop through each user note
             note = note.read()                              # extract note record (Dictionary)
             note['note'] = markdown.markdown(note['note'])  # convert markdown to html
-            notes.append(note)                              # prepare note list for render_template
-    # render user and note data
-    return render_template('notes.html', user=user, notes=notes)
+            list_notes.append(note)                         # prepare note list for render_template
+    # render user and note data in reverse chronological order
+    return render_template('notes.html', user=user, notes=list_notes.reverse())
 
 
 # Preserve redirect after login to go to intended next page

@@ -14,17 +14,21 @@ app_notes = Blueprint('notes', __name__,
 @app_notes.route('/notes')
 @login_required
 def notes():
+    # defaults are empty, in case user data not found
     user = ""
-    uo = user_by_id(current_user.userID)
-    if uo is not None:
-        user = uo.read()  # placed in list for easier/consistent use within HTML
-
     notes = []
-    for note in uo.notes:
-        note = note.read()  # convert to JSON
-        note['note'] = markdown.markdown(note['note'])  # markdown to html
-        notes.append(note)
 
+    # grab user database  object based on current login
+    uo = user_by_id(current_user.userID)
+
+    # if user object is found
+    if uo is not None:
+        user = uo.read()                                    # extract user record (Dictionary)
+        for note in uo.notes:                               # loop through each user note
+            note = note.read()                              # extract note record (Dictionary)
+            note['note'] = markdown.markdown(note['note'])  # convert markdown to html
+            notes.append(note)                              # prepare note list for render_template
+    # render user and note data
     return render_template('notes.html', user=user, notes=notes)
 
 

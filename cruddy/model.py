@@ -15,6 +15,10 @@ class Notes(db.Model):
     note = db.Column(db.Text, unique=False, nullable=False)
     userID = db.Column(db.Integer, db.ForeignKey('users.userID'))
 
+    # returns a string representation of object, similar to java toString()
+    def __repr__(self):
+        return "Notes(" + str(self.id) + "," + self.note + "," + str(self.userID) + ")"
+
     # CRUD read converts self to dictionary
     # returns dictionary
     def read(self):
@@ -23,6 +27,7 @@ class Notes(db.Model):
             "note": self.note,
             "userID": self.userID
         }
+
 
 # Define the Users table within the model
 # -- Object Relational Mapping (ORM) is the key concept of SQLAlchemy
@@ -45,6 +50,10 @@ class Users(UserMixin, db.Model):
         self.email = email
         self.set_password(password)
         self.phone = phone
+
+    # returns a string representation of object, similar to java toString()
+    def __repr__(self):
+        return "Users(" + str(self.userID) + "," + self.name + "," + str(self.email) + ")"
 
     # CRUD create/add a new record to the table
     # returns self or None on error

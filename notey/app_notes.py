@@ -1,7 +1,8 @@
 import markdown
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,request,redirect,url_for
 from flask_login import login_required, current_user
 from cruddy.query import user_by_id
+from cruddy.model import Notes
 
 # blueprint defaults https://flask.palletsprojects.com/en/2.0.x/api/#blueprint-objects
 app_notes = Blueprint('notes', __name__,
@@ -10,7 +11,6 @@ app_notes = Blueprint('notes', __name__,
                       static_folder='static',
                       static_url_path='static')
 
-
 @app_notes.route('/notes')
 @login_required
 def notes():
@@ -18,7 +18,7 @@ def notes():
     user = ""
     list_notes = []
 
-    # grab user database  object based on current login
+    # grab user database object based on current login
     uo = user_by_id(current_user.userID)
 
     # if user object is found
@@ -33,6 +33,16 @@ def notes():
     # render user and note data in reverse chronological order
     return render_template('notes.html', user=user, notes=list_notes)
 
+# Notes create/add
+@app_notes.route('/create/', methods=["POST"])
+def create():
+    """gets data from form and add it to Users table"""
+    if request.form:
+        notesObj = Notes(
+            request.form.get("notes"), current_user.userID
+        )
+        notesObj.create()
+    return redirect(url_for('notes.notes'))
 
 # Preserve redirect after login to go to intended next page
 next_page = None

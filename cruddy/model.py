@@ -17,6 +17,11 @@ class Notes(db.Model):
     note = db.Column(db.Text, unique=False, nullable=False)
     userID = db.Column(db.Integer, db.ForeignKey('users.userID'))
 
+    # constructor of a Notes object, initializes of instance variables within object
+    def __init__(self, note, userID):
+        self.note = note
+        self.userID = userID
+
     # returns a string representation of object, similar to java toString()
     def __repr__(self):
         return "Notes(" + str(self.id) + "," + self.note + "," + str(self.userID) + ")"
@@ -30,6 +35,17 @@ class Notes(db.Model):
             "userID": self.userID
         }
 
+    # CRUD create/add a new record to the Notes table
+    # returns self or None on error
+    def create(self):
+        try:
+            # creates a Notes object from Notes(db.Model) class, passes initializers
+            db.session.add(self)  # add prepares to persist person object to Notes table
+            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            return self
+        except IntegrityError:
+            db.session.remove()
+            return None
 
 # Define the Users table within the model
 # -- Object Relational Mapping (ORM) is the key concept of SQLAlchemy
@@ -146,7 +162,6 @@ def model_builder():
         except IntegrityError:
             db.session.remove()
             print(f"Records exist, duplicate email, or error: {row.email}")
-
 
 # Looks into database
 def model_driver():

@@ -13,6 +13,24 @@
         <div class="p-5 mb-4 bg-light text-dark rounded-3">
             <h2>Notes Viewer for {{ user.name }}</h2>
             <hr>
+            <form method="POST" ID="create" action={{url_for('notes.create')}}>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><label for="notes">Create a new note:</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><textarea rows = "5" cols = "100%" name = "notes" id="notes" required></textarea></td>
+                    </tr>
+                    <tr>
+                    <td><input type="submit" value="Add" ></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <hr>
             <div class="row align-items-md-stretch">
                 <table class="table">
                     <tbody>
@@ -24,22 +42,7 @@
                     </tbody>
                 </table>
             </div>
-            <h5>Create a new record</h5>
-            <form method="POST" ID="create" action={{url_for('notes.create')}}>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th><label for="notes">Notes:</label></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td><input type="text" maxlength="250" placeholder="max length 250" size="120" name="notes" id="notes" required></td>
-                            <td><input type="submit" value="Add" ></td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </form>
+
         </div>
     </div>
 </div>

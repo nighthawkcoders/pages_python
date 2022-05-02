@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
-{% block title %} Notes {% endblock %}
+{% block title %}
+    <title>Notes</title>
+{% endblock %}
 
 {% block content %}
 <div class="container py-4">
@@ -24,8 +26,6 @@
                     <tbody>
                     <tr>
                         <td><textarea rows = "5" cols = "100%" name = "notes" id="notes" required></textarea></td>
-                    </tr>
-                    <tr>
                         <td><input type="submit" value="Add" ></td>
                     </tr>
                     </tbody>
@@ -34,12 +34,12 @@
             <hr>
             <!--Notes output area, Jinja lines iterate through notes,
                 note.note is html converted from markdown -->
-            <div class="row align-items-md-stretch">
+            <div class="table-responsive">
                 <table class="table">
                     <tbody>
                     {% for note in notes %}
                     <tr>
-                        <td>{{ note.note |safe }}</td>
+                        <td>{{ note.note | safe }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

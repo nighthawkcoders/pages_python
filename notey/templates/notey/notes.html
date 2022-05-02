@@ -11,8 +11,9 @@
 <div class="container py-4 text-light bg-success">
     <div class="container bg-secondary py-4">
         <div class="p-5 mb-4 bg-light text-dark rounded-3">
-            <h2>Notes Viewer for {{ user.name }}</h2>
+            <h2>Notes for {{ user.name }}</h2>
             <hr>
+            <!--Notes input form, textarea supports multiple lines of input  -->
             <form method="POST" ID="create" action={{url_for('notes.create')}}>
                 <table class="table">
                     <thead>
@@ -25,12 +26,14 @@
                         <td><textarea rows = "5" cols = "100%" name = "notes" id="notes" required></textarea></td>
                     </tr>
                     <tr>
-                    <td><input type="submit" value="Add" ></td>
+                        <td><input type="submit" value="Add" ></td>
                     </tr>
                     </tbody>
                 </table>
             </form>
             <hr>
+            <!--Notes output area, Jinja lines iterate through notes,
+                note.note is html converted from markdown -->
             <div class="row align-items-md-stretch">
                 <table class="table">
                     <tbody>

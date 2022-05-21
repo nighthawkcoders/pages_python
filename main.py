@@ -3,11 +3,13 @@ from flask_login import login_required
 
 from __init__ import app, login_manager
 from cruddy.app_crud import app_crud
+from contenty.app_content import app_content
 from cruddy.app_crud_api import app_crud_api
 from notey.app_notes import app_notes
 
 from cruddy.login import login, logout, authorize
 
+app.register_blueprint(app_content)
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
 app.register_blueprint(app_notes)

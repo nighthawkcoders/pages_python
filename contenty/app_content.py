@@ -66,6 +66,7 @@ def content():
 def upload():
     try:
         # grab file object (fo) from user input
+        # The fo variable holds the submitted file object. This is an instance of class FileStorage, which Flask imports from Werkzeug.
         fo = request.files['filename']
         # save file to location defined in __init__.py
         # ... os.path uses os specific pathing for web server

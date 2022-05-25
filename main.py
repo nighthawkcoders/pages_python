@@ -24,8 +24,7 @@ def index():
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
-    global next_page
-    next_page = request.endpoint
+    app.config['NEXT_PAGE'] = request.endpoint
     return redirect(url_for('main_login'))
 
 
@@ -33,18 +32,16 @@ def unauthorized():
 @app.route('/login/', methods=["GET", "POST"])
 def main_login():
     # obtains form inputs and fulfills login requirements
-    global next_page
     if request.form:
         email = request.form.get("email")
         password = request.form.get("password")
         if login(email, password):
-            try:        # try to redirect to next page
-                temp = next_page
-                next_page = None
-                return redirect(url_for(temp))
-            except:     # any failure goes to home page
+            try:  # try to redirect to next page
+                next_page = app.config['NEXT_PAGE']
+                app.config['NEXT_PAGE'] = None
+                return redirect(url_for(next_page))
+            except:  # any failure goes to home page
                 return redirect(url_for('index'))
-
 
     # if not logged in, show the login page
     return render_template("login.html")

@@ -105,6 +105,7 @@ class Users(UserMixin, db.Model):
             "email": self.email,
             "password": self.password,
             "phone": self.phone,
+            "notes": self.notes,
             "query": "by_alc"  # This is for fun, a little watermark
         }
 

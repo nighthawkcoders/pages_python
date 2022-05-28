@@ -49,6 +49,22 @@ Hack #3 establish a strategy to manage data being stored through Amazon S3 bucke
 files_uploaded = []
 
 
+def upload_save(file_object):
+    # set path to location defined in __init__.py
+    path = app.config['UPLOAD_FOLDER']
+    if not os.path.exists(path):
+        # Create a new directory because it does not exist
+        os.makedirs(path)
+
+    # secure_filename checks for integrity of filename, avoids hacking
+    filename = secure_filename(file_object.filename)
+    # os.path.join adds path for uploads
+    upload_location = os.path.join(path, filename)
+    # save file object to upload location
+    file_object.save(upload_location)
+    return filename
+
+
 # Page to upload content page
 @app_upload.route('/')
 @login_required
@@ -68,20 +84,7 @@ def uploader():
         # grab file object (fo) from user input The fo variable holds the submitted file object. This is an instance
         # of class FileStorage, which Flask imports from Werkzeug.
         fo = request.files['filename']
-
-        # set path to location defined in __init__.py
-        path = app.config['UPLOAD_FOLDER']
-        if not os.path.exists(path):
-            # Create a new directory because it does not exist
-            os.makedirs(path)
-
-        # secure_filename checks for integrity of filename, avoids hacking
-        filename = secure_filename(fo.filename)
-
-        # os.path.join adds path for uploads
-        upload_location = os.path.join(path, filename)
-        # save file object to upload location
-        fo.save(upload_location)
+        filename = upload_save(fo)
 
         # inserts location of object to feedback list
         files_uploaded.insert(0, url_for('uploads_endpoint', name=filename))
@@ -90,4 +93,3 @@ def uploader():
         pass
     # reload content page
     return redirect(url_for('upload.upload'))
-

@@ -16,7 +16,7 @@
             <h2>Notes for {{ user.name }}</h2>
             <hr>
             <!--Notes input form, textarea supports multiple lines of input  -->
-            <form id="note" method="POST" action={{url_for('notes.note_creator')}}>
+            <form id="note" method="POST" enctype="multipart/form-data" action={{url_for('notes.note_creator')}}>
                 <table class="table">
                     <thead>
                     <tr>
@@ -24,6 +24,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td><input type="file" id="filename" name="filename" /></td>
+                    </tr>
                     <tr>
                         <td><textarea rows = "5" cols = "100%" name = "notes" id="notes" required></textarea></td>
                         <td><input type="submit" value="Add" ></td>
@@ -38,6 +41,14 @@
                 <table class="table">
                     <tbody>
                     {% for note in notes %}
+                    {% if note.image %}
+                        <tr>
+                            <td>{{ note.image }}</td>
+                        </tr>
+                        <tr>
+                        <td><image src="{{ url_for('uploads_endpoint', name=note.image) }}" width="150px"></image></td>
+                        </tr>
+                    {% endif %}
                     <tr>
                         <td>{{ note.note | safe }}</td>
                     </tr>

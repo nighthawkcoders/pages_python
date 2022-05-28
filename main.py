@@ -1,15 +1,15 @@
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request, url_for, send_from_directory
 from flask_login import login_required
 
 from __init__ import app, login_manager
 from cruddy.app_crud import app_crud
-from contenty.app_content import app_content
+from uploady.app_upload import app_upload
 from cruddy.app_crud_api import app_crud_api
 from notey.app_notes import app_notes
 
 from cruddy.login import login, logout, authorize
 
-app.register_blueprint(app_content)
+app.register_blueprint(app_upload)
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
 app.register_blueprint(app_notes)
@@ -55,6 +55,7 @@ def main_logout():
     return redirect(url_for('index'))
 
 
+# user authorize with password validation
 @app.route('/authorize/', methods=["GET", "POST"])
 def main_authorize():
     error_msg = ""
@@ -74,9 +75,21 @@ def main_authorize():
     return render_template("authorize.html", error_msg=error_msg)
 
 
+# serve uploaded files so they can be downloaded by users.
+@app.route('/uploads/<name>')
+def uploads_endpoint(name):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+
+
+# register "uploads_endpoint" endpoint so url_for will find all uploaded files
+app.add_url_rule(
+    "/" + app.config['UPLOAD_FOLDER'] + "/<name>", endpoint="uploads_endpoint", build_only=True
+)
+
+
+# 404 error page redirect
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
 

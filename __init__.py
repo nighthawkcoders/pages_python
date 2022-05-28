@@ -9,7 +9,6 @@ These object will be used throughout project.
 2.) Isolating these object definitions avoids duplication and circular dependencies
 """
 
-
 # Setup of key Flask object (app)
 app = Flask(__name__)
 # Setup SQLAlchemy object and properties for the database (db)
@@ -25,6 +24,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 # Setup custom application variables
-app.config['UPLOAD_FOLDER'] = 'static/uploads/'     # user uploaded content
-app.config['NEXT_PAGE'] = None                      # next page on login attempt
-
+app.config['NEXT_PAGE'] = None  # next page on login attempt
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # maximum size of uploaded content
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']  # supported file types
+app.config['UPLOAD_FOLDER'] = 'uploads/'  # location of user uploaded content

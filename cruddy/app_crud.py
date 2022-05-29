@@ -41,15 +41,13 @@ def create():
 
 
 # CRUD read
-@app_crud.route('/read/', methods=["POST"])
-def read():
-    """gets userid from form and obtains corresponding data from Users table"""
+@app_crud.route('/read/<userID>')
+def read(userID):
+    """gets userid from form action"""
     table = []
-    if request.form:
-        userid = request.form.get("userid")
-        po = user_by_id(userid)
-        if po is not None:
-            table = [po.read()]  # placed in list for easier/consistent use within HTML
+    po = user_by_id(userID)
+    if po is not None:
+        table = [po.read()]  # placed in list for easier/consistent use within HTML
     return render_template("crud.html", table=table)
 
 
@@ -60,21 +58,22 @@ def update():
     if request.form:
         userid = request.form.get("userid")
         name = request.form.get("name")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        phone = request.form.get("phone")
         po = user_by_id(userid)
         if po is not None:
-            po.update(name)
+            po.update(name, email, password, phone)
     return redirect(url_for('crud.crud'))
 
 
 # CRUD delete
-@app_crud.route('/delete/', methods=["POST"])
-def delete():
-    """gets userid from form delete corresponding record from Users table"""
-    if request.form:
-        userid = request.form.get("userid")
-        po = user_by_id(userid)
-        if po is not None:
-            po.delete()
+@app_crud.route('/delete/<userID>')
+def delete(userID):
+    """gets userid from action"""
+    po = user_by_id(userID)
+    if po is not None:
+        po.delete()
     return redirect(url_for('crud.crud'))
 
 

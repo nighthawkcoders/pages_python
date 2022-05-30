@@ -109,6 +109,14 @@ class Users(UserMixin, db.Model):
             "query": "by_alc"  # This is for fun, a little watermark
         }
 
+    def read2(self):
+        return {
+            "userID": self.userID,
+            "name": self.name,
+            "email": self.email,
+            "phone": self.phone,
+        }
+
     # CRUD update: updates users name, password, phone
     # returns self
     def update(self, name="", email="", password="", phone=""):

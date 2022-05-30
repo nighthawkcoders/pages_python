@@ -90,5 +90,7 @@ def search_term():
     """ obtain term/search request """
     req = request.get_json()
     term = req['term']
-    response = make_response(jsonify(users_ilike(term)), 200)
+    json_ready = users_ilike(term)
+    json = jsonify(json_ready)
+    response = make_response(json, 200)
     return response

@@ -54,7 +54,10 @@ def note_creator():
     if request.form:
         # construct a Notes object
         fo = request.files['filename']
-        filename = upload_save(fo)
+        if fo.content_length:
+            filename = upload_save(fo)
+        else:
+            filename = ""
         note_object = Notes(
             current_user.userID,
             request.form.get("notes"),

@@ -171,10 +171,10 @@ def model_builder():
     for row in table:
         # prime uploads foler
         try:
-            os.makedirs('../uploads')
+            os.makedirs('../volumes/uploads')
         except:
             pass
-        shutil.copy("../static/assets/ncs_logo.png", "../uploads")
+        shutil.copy("../static/assets/ncs_logo.png", "../volumes/uploads")
         # add some notes with default image
         try:
             '''add a few 1 to 4 notes per user'''

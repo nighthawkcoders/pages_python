@@ -2,6 +2,7 @@ from flask import render_template, redirect, request, url_for, send_from_directo
 from flask_login import login_required
 
 from __init__ import app, login_manager
+from frontend.frontend import app_frontend
 from cruddy.app_crud import app_crud
 from uploady.app_upload import app_upload
 from cruddy.app_crud_api import app_crud_api
@@ -9,6 +10,7 @@ from notey.app_notes import app_notes
 
 from cruddy.login import login, logout, authorize
 
+app.register_blueprint(app_frontend)
 app.register_blueprint(app_upload)
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
